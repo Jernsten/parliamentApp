@@ -1,15 +1,55 @@
-import { isLogging, thisYear, buildHandlers, toggle } from "./scripts.js";
+import { isLogging, thisYear, buildHandlers } from "./scripts.js";
 
-export async function init() {
-    logger('>> > init')
+class Parliament {
+    constructor(parliamentData) {
+        logger('>> > Parliament.constructor')
 
-    const parliamentData = await fetchParliamentData().then(data => { return data })
-    const gatherMembers = await createMembers(parliamentData)
-    const sortedMembers = await sortPerPartySize(gatherMembers)
+        this.members = this.sortMembersPerPartySize(
+            this.gatherMembers(parliamentData))
+    }
 
-    display(sortedMembers)
-    buildHandlers()
-    return true
+    gatherMembers(parliamentData) {
+        logger('>> > Parliament.gatherMembers')
+
+        const members = []
+
+        parliamentData.personlista.person.forEach(person => {
+            members.push(new Member(
+                person.tilltalsnamn,
+                person.efternamn,
+                person.fodd_ar,
+                person.kon,
+                person.parti,
+                person.valkrets,
+                person.bild_url_192,
+            ))
+        })
+        return members
+    }
+
+    sortMembersPerPartySize(members) {
+        logger('>> > sortMembersPerPartySize')
+
+        const partyCount = {}
+        const partiesSortedBySize = []
+        const sortedMemberArray = []
+
+        // Count occurence of members per party
+        members.forEach((member) => { !partyCount[member.party] ? partyCount[member.party] = 1 : partyCount[member.party] += 1 })
+        // Push order to sort to array
+        for (let party in partyCount) {
+            partiesSortedBySize.push([party, partyCount[party]])
+        }
+        // Descending sort
+        partiesSortedBySize.sort((a, b) => { return b[1] - a[1] })
+
+        partiesSortedBySize.forEach(party =>
+            members.forEach(member => {
+                member.party == party[0] && sortedMemberArray.push(member)
+            }))
+
+        return sortedMemberArray
+    }
 }
 
 class Member {
@@ -49,77 +89,44 @@ class Member {
     }
 }
 
+async function fetchData() {
+    logger('>> > fetchData')
+
+    const url = 'http://data.riksdagen.se/personlista/?utformat=json'
+
+    const data = await fetch(url)
+        .then(response => response.ok ? response.json() : Error('API response error'))
+        .catch(async error => {
+            logger(`>> > fetchParliamentData.catch, Error: ${error.message}`)
+
+            // Use snapshot if API not responding
+            return await fetch('json/data.json').then(localData => localData.json());
+        })
+
+    return data
+}
+
 export function logger(message) {
     isLogging && console.log(message)
 }
 
-async function fetchParliamentData() {
-    logger('>> > fetchParliamentData')
-
-    const url = 'json/data.json' // For production: url = 'http://data.riksdagen.se/personlista/?utformat=json'
-    const json = await fetch(url)
-        .then(response => { return response.json() })
-        .catch(error => { logger(error.message) })
-
-    return json
-}
-
-function createMembers(parliamentData) {
-    logger('>> > createMembers')
-
-    const membersData = parliamentData.personlista.person;
-    const members = []
-
-    membersData.forEach(person => {
-        members.push(new Member(
-            person.tilltalsnamn,
-            person.efternamn,
-            person.fodd_ar,
-            person.kon,
-            person.parti,
-            person.valkrets,
-            person.bild_url_192,
-        ))
-    })
-
-    return members
-}
-
-function sortPerPartySize(memberArray) {
-    logger('>> > sortPerPartySize')
-
-    const partyOccurrences = {}
-
-    // Count occurence of parties
-    memberArray.forEach((member) => {
-        !partyOccurrences[member.party] ?
-            partyOccurrences[member.party] = 1 :
-            partyOccurrences[member.party] += 1
-    })
-
-    const partiesSortedBySize = []
-
-    for (let party in partyOccurrences) {
-        partiesSortedBySize.push([party, partyOccurrences[party]])
-    }
-
-    partiesSortedBySize.sort((a, b) => { return b[1] - a[1] }) // Descending sort
-
-    const sortedMemberArray = []
-
-    partiesSortedBySize.forEach(party =>
-        memberArray.forEach(member => {
-            member.party == party[0] && sortedMemberArray.push(member)
-        }))
-
-    return sortedMemberArray
-}
-
-
-function display(membersArray) {
+function display(members) {
     logger('>> > display')
 
-    membersArray.forEach(member => {
+    members.forEach(member => {
         document.getElementById('parliamentList').appendChild(member.toListNode())
     })
+}
+
+export async function init() {
+    logger('>> > init')
+
+    // const parliamentData = await fetchParliamentData().then(data => { return data })
+    // const gatherMembers = await createMembers(parliamentData)
+    // const sortedMembers = await sortPerPartySize(gatherMembers)
+    const data = await fetchData()
+    const parliament = new Parliament(data)
+
+    display(parliament.members)
+    return true
 }
