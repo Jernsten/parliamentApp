@@ -1,4 +1,4 @@
-import { isLogging, thisYear, buildHandlers } from "./scripts.js";
+import { isLogging, thisYear } from "./scripts.js";
 
 class Parliament {
     constructor(parliamentData) {
@@ -128,5 +128,5 @@ export async function init() {
     const parliament = new Parliament(data)
 
     display(parliament.members)
-    return true
+    return false
 }

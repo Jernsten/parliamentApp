@@ -4,24 +4,31 @@ import { init, logger } from './build.js'
 export const isLogging = true
 export const thisYear = (() => { const date = new Date(); return date.getFullYear() })()
 
-export function hide(query) {
-    logger(`>> > toggle, query = '${query}'`)
+function hide(className) {
+    logger(`>> > toggle, query = '${className}'`)
 
-    const node = document.getElementsByClassName(query)
-    logger(node)
+    const nodes = document.getElementsByClassName(className)
+    logger(nodes)
+    return () => {
+        nodes.forEach(node => node.classList.toggle(className)
+        )
+    }
 }
 
-export function buildListeners(id, toggle) {
-    logger('>> > buildListeners')
+function buildListener(triggerId, className) {
+    logger('>> > buildListener')
 
-    const menListener = document.getElementById('hideMen').addEventListener('change', hide('.Man'))
-    const womenListener = document.getElementById('hideWomen').addEventListener('change', hide('.Woman'))
+    const listener = document.getElementById(triggerId).addEventListener('change', hide(className))
 
-    return [menListener, womenListener]
+    return listener
 }
 
 async function main() {
-    await init() && buildListeners()
+    logger('>> > main')
+
+    await init()
+    buildListener('hideMen', '.Man')
 }
+
 
 main()
