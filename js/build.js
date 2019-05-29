@@ -92,7 +92,7 @@ class Member {
 async function fetchData() {
     logger('>> > fetchData')
 
-    const url = 'http://data.riksdagen.se/personlista/?utformat=json'
+    const url = 'https://data.riksdagen.se/personlista/?utformat=json'
 
     const data = await fetch(url)
         .then(response => response.ok ? response.json() : Error('API response error'))
