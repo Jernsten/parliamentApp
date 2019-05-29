@@ -8,10 +8,11 @@ function hide(className) {
     logger(`>> > toggle, query = '${className}'`)
 
     const nodes = document.getElementsByClassName(className)
-    logger(nodes)
-    return () => {
-        nodes.forEach(node => node.classList.toggle(className)
-        )
+    
+    return function() {
+        while (nodes.length > 0) {
+            nodes[0].classList.toggle('hide')
+        }
     }
 }
 
