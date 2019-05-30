@@ -28,7 +28,7 @@ class Parliament {
     }
 
     sortMembersPerPartySize(members) {
-        logger('>> > sortMembersPerPartySize')
+        logger('>> > Parliament.sortMembersPerPartySize')
 
         const partyCount = {}
         const partiesSortedBySize = []
@@ -54,22 +54,24 @@ class Parliament {
 
 class Member {
     constructor(firstName, lastName, born, gender, party, area, imgUrl) {
-        logger('>> > Member.constructor')
+        logger('> Member.constructor')
         this.name = `${firstName} ${lastName}`
         this.born = born
         this.age = thisYear - born
-        this.gender = gender == 'man' ? 'Man' : 'Woman'
+        this.gender = gender == 'man' ? 'man' : 'woman'
         this.party = party
         this.area = area
         this.imgUrl = imgUrl
     }
 
-    toListNode() {
-        logger('>> > Member.toListNode')
+    toHTMLNode() {
+        logger('> Member.toHTMLNode')
 
-        const listNode = document.createElement('li')
-        listNode.classList.add('member', this.party, this.gender, this.age)
-        listNode.setAttribute('data-imgUrl', this.imgUrl)
+        const li = document.createElement('li')
+        li.classList.add('member', this.party, this.gender)
+        li.setAttribute('data-age', this.age)
+        li.setAttribute('data-gender', this.gender)
+        li.setAttribute('data-imgUrl', this.imgUrl)
 
         const spanList =
             [{ name: this.name },
@@ -82,51 +84,47 @@ class Member {
             let aSpanName = Object.getOwnPropertyNames(span)
             aSpanNode.classList.add(aSpanName)
             aSpanNode.innerText = span[aSpanName]
-            listNode.appendChild(aSpanNode)
+            li.appendChild(aSpanNode)
         })
 
-        return listNode
+        return li
     }
 }
 
 async function fetchData() {
     logger('>> > fetchData')
 
-    const url = 'https://data.riksdagen.se/personlista/?utformat=json'
+    const url = 'http://data.riksdagen.se/personlista/?utformat=json'
 
     const data = await fetch(url)
-        .then(response => response.ok ? response.json() : Error('API response error'))
+        .then(response => response.ok ? response.json() : Error('XXXX API response error'))
         .catch(async error => {
-            logger(`>> > fetchParliamentData.catch, Error: ${error.message}`)
+            logger(`XXXX fetchParliamentData.catch, Error: ${error.message}`)
 
-            // Use snapshot if API not responding
-            return await fetch('json/data.json').then(localData => localData.json());
+            return await fetch('json/snapshot.json').then(localSnapshot => localSnapshot.json());
         })
-
     return data
 }
 
 export function logger(message) {
     isLogging && console.log(message)
+    return true
 }
 
 function display(members) {
     logger('>> > display')
 
     members.forEach(member => {
-        document.getElementById('parliamentList').appendChild(member.toListNode())
+        document.getElementById('parliamentList').appendChild(member.toHTMLNode())
     })
 }
 
 export async function init() {
     logger('>> > init')
 
-    // const parliamentData = await fetchParliamentData().then(data => { return data })
-    // const gatherMembers = await createMembers(parliamentData)
-    // const sortedMembers = await sortPerPartySize(gatherMembers)
     const data = await fetchData()
     const parliament = new Parliament(data)
 
     display(parliament.members)
-    return false
+    return true
 }
