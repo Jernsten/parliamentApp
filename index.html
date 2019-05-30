@@ -12,16 +12,18 @@
 <body>
   <main id="main">
     <label class="slidecontainer">
-      <input type="range" min="23" max="85" value="85" class="ageSlider" id="agerange">
-      <span id="selectedage">85</span> år
+      <input type="range" min="0" value="100" class="ageSlider" id="agerange">
     </label>
-    <span id="filtergender" data-state="showall">
-      <span id="women">Kvinna</span>
-      <span id="men">Man</span>
-    </span>
 
+    <label class="slidecontainer">
+      <input type="range" min="0" max="2" value="1" class="genderSlider" id="showgender">
+    </label>
 
-    <ul id="parliamentList"></ul>
+    <span id="selectedage">Alla</span>
+    <span id="selectedgender">kvinnor och män</span>
+    <span>i Sveriges Riksdag</div>
+
+      <ul id="parliamentList"></ul>
   </main>
   <script src="js/scripts.js" type="module"></script>
 </body>

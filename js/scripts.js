@@ -19,39 +19,75 @@ main()
 function attachListeners() {
     logger('>> > attachListeners')
 
+    ageRange()
     const ageSlider = document.getElementById('agerange')
-    const genderSelector = document.getElementById('filtergender')
+    ageSlider.setAttribute('max', ageRange.maxSliderValue)
 
-    ageSlider.onchange = function () {
-        logger(`FLTR ageSlider ${this.value}`)
-        document.getElementById('selectedage').innerText = this.value
+    ageSlider.oninput = function () {
+        const selection = ageRange.sliderPositions[this.value]
+        logger(`FLTR ageSlider ${selection}`)
+
+        // output age selection
+        const ageOutput = selection == 100 ? 'Alla' : `${selection} åriga`
+        document.getElementById('selectedage').innerText = ageOutput
+
+        // show members of selected age
         const members = [...document.getElementsByClassName('member')]
 
         for (let i = 0; i < members.length; i++) {
-            const age = members[i].getAttribute('data-age')
+            const age = Number(members[i].getAttribute('data-age'))
 
-            members[i].classList.contains('isolder') ?
-                age <= this.value && members[i].classList.remove('isolder') :// if younger
-                age > this.value && members[i].classList.add('isolder')     // if older
+            switch (Number(selection)) {
+                case 100:
+                case age:
+                    members[i].classList.remove('wrongage')
+                    break
+                default:
+                    members[i].classList.add('wrongage')
+                    break
+            }
         }
+
+        checkForSingles() // Check if only one member showing
     }
 
-    genderSelector.onclick = function () {
-        logger('FLTR genderSelector')
+    function ageRange() {
+        logger('>> > ageRange')
 
-        switch (this.getAttribute('data-state')) {
-            case 'showall':
-                this.setAttribute('data-state', 'showwomen')
+        const members = [...document.getElementsByClassName('member')]
+
+        ageRange.sliderPositions = [... new Set(members.map(member => Number(member.getAttribute('data-age')))),
+            100].sort((one, theNext) => one - theNext)
+
+        ageRange.maxSliderValue = ageRange.sliderPositions.length - 1
+    }
+
+    const genderSlider = document.getElementById('showgender')
+
+    genderSlider.oninput = function () {
+        logger('FLTR genderSlider')
+
+        switch (this.value) {
+            case '0': // show only women
+                genderSelectionOutput('kvinnor')
+                genderFilter('showWomen')
                 break
-            case 'showwomen':
-                this.setAttribute('data-state', 'showmen')
+            case '1': // show both
+                genderSelectionOutput('kvinnor och män')
+                genderFilter('showBoth')
                 break
-            case 'showmen':
-                this.setAttribute('data-state', 'showall')
+            case '2': // show only men
+                genderSelectionOutput('män')
+                genderFilter('showMen')
                 break
         }
+        checkForSingles() // Check if only one member showing
+    }
 
-        genderFilter(this.getAttribute('data-state'))
+    function genderSelectionOutput(selection) {
+        logger('>> > genderSelectionOutput')
+
+        document.getElementById('selectedgender').innerText = selection
     }
 
     function genderFilter(whatToShow) {
@@ -59,24 +95,47 @@ function attachListeners() {
         const members = [...document.getElementsByClassName('member')]
 
         for (let i = 0; i < members.length; i++) {
-            const gender = members[i].getAttribute('data-gender')
+            const member = members[i].getAttribute('data-gender')
 
-            showThis(gender) ?
+            showThis(member, whatToShow) ?
                 members[i].classList.remove('dontshowthisgender') :
                 members[i].classList.add('dontshowthisgender')
         }
 
-        function showThis(gender) {
-            switch (whatToShow) {
-                case 'showall':
-                    return true
-                case 'showwomen':
-                    return gender == 'woman'
-                case 'showmen':
-                    return gender == 'man'
+    }
+
+    function showThis(member, whatToShow) {
+        switch (whatToShow) {
+            case 'showWomen':
+                return member == 'woman'
+            case 'showBoth':
+                return true
+            case 'showMen':
+                return member == 'man'
+        }
+    }
+
+    function checkForSingles() {
+        logger('>> checkForSingles ')
+
+        const showingMembers = [...document.getElementsByClassName('member')]
+            .filter(member => !(member.classList.contains('dontshowthisgender') ||
+                member.classList.contains('wrongage')))
+
+        logger(showingMembers.length)
+
+        if (showingMembers.length == 1) {
+            logger('yolo')
+            switch (showingMembers[0].getAttribute('data-gender')) {
+                case 'man':
+                    genderSelectionOutput('man')
+                    break
+                case 'woman':
+                    genderSelectionOutput('kvinna')
+                    break
             }
         }
     }
-}
 
-function hide() { }
+
+}

@@ -67,12 +67,14 @@ class Member {
     toHTMLNode() {
         logger('> Member.toHTMLNode')
 
+        // Create <li> node and set member details
         const li = document.createElement('li')
         li.classList.add('member', this.party, this.gender)
         li.setAttribute('data-age', this.age)
         li.setAttribute('data-gender', this.gender)
         li.setAttribute('data-imgUrl', this.imgUrl)
 
+        // Create output <spans> with member details
         const spanList =
             [{ name: this.name },
             { party: this.party },
@@ -86,6 +88,11 @@ class Member {
             aSpanNode.innerText = span[aSpanName]
             li.appendChild(aSpanNode)
         })
+
+        // attach image of member
+        let img = document.createElement('img')
+        img.setAttribute('src', this.imgUrl)
+        li.appendChild(img)
 
         return li
     }

@@ -2,7 +2,8 @@
 .hidemen,
 .hidewomen,
 .isolder,
-.dontshowthisgender {
+.dontshowthisgender,
+.wrongage {
   display: none;
 }
 body > main#main {
