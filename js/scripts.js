@@ -2,140 +2,112 @@ import { init, logger } from './build.js'
 
 // Turn on and off logging to console
 export const isLogging = true
-export const thisYear = (() => { const date = new Date(); return date.getFullYear() })()
 
 async function main() {
     logger('>> > main')
 
-    const initiatedSuccessfully = await init()
+    const parliament = await init()
 
-    initiatedSuccessfully ?                                      // IF ?
-        attachListeners() && logger('OKOK Listeners attached') : // TRUE or:
-        showErrorScreen() && logger('XXXX Failed to init')       // FALSE
+    if (parliament.members.length > 1) {
+        display(parliament.members)
+        setupSlider()
+        attachEventHandlers()
+    } else {
+        logger('Not going as planned here...')
+    }
 }
 
 main()
 
-function attachListeners() {
-    logger('>> > attachListeners')
+function display(members) {
+    logger('>> > display')
 
-    ageRange()
-    const ageSlider = document.getElementById('agerange')
-    ageSlider.setAttribute('max', ageRange.maxSliderValue)
+    members.forEach(member => {
+        document.getElementById('parliamentlist').appendChild(member.toHTMLNode())
+    })
+}
 
+
+function setupSlider() {
+    logger('>> > setupSlider')
+
+    const slider = document.getElementById('ageslider')
+    const gender = sessionStorage.getItem('gender')
+    const members = [...document.getElementsByClassName('member')].filter(member => gender == 'both' || member.getAttribute('data-gender') == gender )
+    slider.steps = [... new Set(members.map((member) => +member.getAttribute('data-age'))), 100].sort((a, b) => a - b) // 100 for 'show all ages'
+    slider.max = slider.steps.length - 1
+}
+
+function attachEventHandlers() {
+    logger('>> > attachEventHandlers')
+
+    const ageSlider = document.getElementById('ageslider')
     ageSlider.oninput = function () {
-        const selection = ageRange.sliderPositions[this.value]
-        logger(`FLTR ageSlider ${selection}`)
+        logger('>> > ageSlider ' + ageSlider.steps[this.value] + ' år')
 
-        // output age selection
-        const ageOutput = selection == 100 ? 'Alla' : `${selection} åriga`
-        document.getElementById('selectedage').innerText = ageOutput
+        sessionStorage.setItem('age', ageSlider.steps[this.value])
 
-        // show members of selected age
-        const members = [...document.getElementsByClassName('member')]
-
-        for (let i = 0; i < members.length; i++) {
-            const age = Number(members[i].getAttribute('data-age'))
-
-            switch (Number(selection)) {
-                case 100:
-                case age:
-                    members[i].classList.remove('wrongage')
-                    break
-                default:
-                    members[i].classList.add('wrongage')
-                    break
-            }
-        }
-
-        checkForSingles() // Check if only one member showing
+        update()
     }
 
-    function ageRange() {
-        logger('>> > ageRange')
-
-        const members = [...document.getElementsByClassName('member')]
-
-        ageRange.sliderPositions = [... new Set(members.map(member => Number(member.getAttribute('data-age')))),
-            100].sort((one, theNext) => one - theNext)
-
-        ageRange.maxSliderValue = ageRange.sliderPositions.length - 1
-    }
-
-    const genderSlider = document.getElementById('showgender')
-
+    const genderSlider = document.getElementById('genderslider')
+    sessionStorage.setItem('gender', 'both')
     genderSlider.oninput = function () {
-        logger('FLTR genderSlider')
-
+        logger('FILTER gender: ' + this.value)
         switch (this.value) {
-            case '0': // show only women
-                genderSelectionOutput('kvinnor')
-                genderFilter('showWomen')
+            case '0':
+                sessionStorage.setItem('gender', 'woman')
                 break
-            case '1': // show both
-                genderSelectionOutput('kvinnor och män')
-                genderFilter('showBoth')
+            case '1':
+                sessionStorage.setItem('gender', 'both')
                 break
-            case '2': // show only men
-                genderSelectionOutput('män')
-                genderFilter('showMen')
-                break
-        }
-        checkForSingles() // Check if only one member showing
-    }
-
-    function genderSelectionOutput(selection) {
-        logger('>> > genderSelectionOutput')
-
-        document.getElementById('selectedgender').innerText = selection
-    }
-
-    function genderFilter(whatToShow) {
-        logger('>> > genderFilter')
-        const members = [...document.getElementsByClassName('member')]
-
-        for (let i = 0; i < members.length; i++) {
-            const member = members[i].getAttribute('data-gender')
-
-            showThis(member, whatToShow) ?
-                members[i].classList.remove('dontshowthisgender') :
-                members[i].classList.add('dontshowthisgender')
+            case '2':
+                sessionStorage.setItem('gender', 'man')
         }
 
+        update()
     }
+}
 
-    function showThis(member, whatToShow) {
-        switch (whatToShow) {
-            case 'showWomen':
-                return member == 'woman'
-            case 'showBoth':
-                return true
-            case 'showMen':
-                return member == 'man'
+function update() {
+    logger('>> update')
+    const age = sessionStorage.getItem('age')
+    const gender = sessionStorage.getItem('gender')
+    const members = [...document.getElementsByClassName('member')]
+
+    logger('FILTER ' + age + ' ' + gender + '     >>>>>>>>>>>')
+
+    // Show or hide members
+    members.forEach(member => {
+        if ((age == 100 || member.getAttribute('data-age') == age) &&
+            (gender == 'both' || member.getAttribute('data-gender') == gender)) {
+            member.classList.remove('hide')
+        } else {
+            member.classList.add('hide')
         }
+    })
+
+    outputText()
+    setupSlider()
+}
+
+function outputText() {
+    logger('>> outputText')
+    const notHiddenMembers = [...document.getElementsByClassName('member')].filter(member => !member.classList.contains('hide'))
+    const allaEllerEn = document.getElementById('allaelleren')
+    const selectedAge = document.getElementById('selectedage')
+    const selectedGender = document.getElementById('selectedgender')
+
+    const membersCount = notHiddenMembers.length
+    allaEllerEn.innerText = membersCount == 0 ? 'Inga ' : membersCount == 1 ? 'En ' : 'Alla '
+    selectedAge.innerText = sessionStorage.getItem('age') == 100 ? '' : sessionStorage.getItem('age') + (notHiddenMembers.length == 1 ? '-årig ' : '-åriga ')
+
+    const gendersOfNotHiddenMembers = notHiddenMembers.map(member => member.getAttribute('data-gender'))
+    if (gendersOfNotHiddenMembers.length == 1) {
+        selectedGender.innerText = gendersOfNotHiddenMembers[0] == 'woman' ? 'kvinna' : 'man'
+    } else if ([...new Set(gendersOfNotHiddenMembers)].length == 1) {
+        selectedGender.innerText = gendersOfNotHiddenMembers[0] == 'woman' ? 'kvinnor' : 'män'
+    } else {
+        selectedGender.innerText = 'kvinnor och män'
     }
-
-    function checkForSingles() {
-        logger('>> checkForSingles ')
-
-        const showingMembers = [...document.getElementsByClassName('member')]
-            .filter(member => !(member.classList.contains('dontshowthisgender') ||
-                member.classList.contains('wrongage')))
-
-        logger(showingMembers.length)
-
-        if (showingMembers.length == 1) {
-            logger('yolo')
-            switch (showingMembers[0].getAttribute('data-gender')) {
-                case 'man':
-                    genderSelectionOutput('man')
-                    break
-                case 'woman':
-                    genderSelectionOutput('kvinna')
-                    break
-            }
-        }
-    }
-
-
 }

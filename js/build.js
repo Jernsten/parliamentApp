@@ -1,11 +1,11 @@
-import { isLogging, thisYear } from "./scripts.js";
+import { isLogging } from "./scripts.js";
+
+const thisYear = (() => { const date = new Date(); return date.getFullYear() })()
 
 class Parliament {
     constructor(parliamentData) {
         logger('>> > Parliament.constructor')
-
-        this.members = this.sortMembersPerPartySize(
-            this.gatherMembers(parliamentData))
+        this.members = this.sortMembersPerPartySize(this.gatherMembers(parliamentData))
     }
 
     gatherMembers(parliamentData) {
@@ -118,20 +118,11 @@ export function logger(message) {
     return true
 }
 
-function display(members) {
-    logger('>> > display')
-
-    members.forEach(member => {
-        document.getElementById('parliamentList').appendChild(member.toHTMLNode())
-    })
-}
-
 export async function init() {
     logger('>> > init')
 
     const data = await fetchData()
     const parliament = new Parliament(data)
 
-    display(parliament.members)
-    return true
+    return parliament
 }

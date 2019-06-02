@@ -11,19 +11,23 @@
 
 <body>
   <main id="main">
-    <label class="slidecontainer">
-      <input type="range" min="0" value="100" class="ageSlider" id="agerange">
-    </label>
+    <div id="sliders">
+      <label class="slidecontainer">
+        <input type="range" min="0" class="slider" id="ageslider">
+      </label>
 
-    <label class="slidecontainer">
-      <input type="range" min="0" max="2" value="1" class="genderSlider" id="showgender">
-    </label>
+      <label class="slidecontainer">
+        <input type="range" min="0" max="2" value="1" class="slider" id="genderslider">
+      </label>
+    </div>
+    <div id="headline">
+      <span id="allaelleren">Alla</span>
+      <span id="selectedage"></span>
+      <span id="selectedgender">kvinnor och män</span>
+      <span>i Sveriges Riksdag</span>
+    </div>
+    <ul id="parliamentlist"></ul>
 
-    <span id="selectedage">Alla</span>
-    <span id="selectedgender">kvinnor och män</span>
-    <span>i Sveriges Riksdag</div>
-
-      <ul id="parliamentList"></ul>
   </main>
   <script src="js/scripts.js" type="module"></script>
 </body>
