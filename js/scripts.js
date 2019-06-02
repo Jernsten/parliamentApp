@@ -33,7 +33,7 @@ function setupSlider() {
 
     const slider = document.getElementById('ageslider')
     const gender = sessionStorage.getItem('gender')
-    const members = [...document.getElementsByClassName('member')].filter(member => gender == 'both' || member.getAttribute('data-gender') == gender )
+    const members = [...document.getElementsByClassName('member')].filter(member => gender == 'both' || member.getAttribute('data-gender') == gender)
     slider.steps = [... new Set(members.map((member) => +member.getAttribute('data-age'))), 100].sort((a, b) => a - b) // 100 for 'show all ages'
     slider.max = slider.steps.length - 1
 }
@@ -65,6 +65,7 @@ function attachEventHandlers() {
                 sessionStorage.setItem('gender', 'man')
         }
 
+        setupSlider()
         update()
     }
 }
@@ -88,26 +89,37 @@ function update() {
     })
 
     outputText()
-    setupSlider()
 }
 
 function outputText() {
     logger('>> outputText')
-    const notHiddenMembers = [...document.getElementsByClassName('member')].filter(member => !member.classList.contains('hide'))
+    const age = sessionStorage.getItem('age')
+    const gender = sessionStorage.getItem('gender')
     const allaEllerEn = document.getElementById('allaelleren')
     const selectedAge = document.getElementById('selectedage')
     const selectedGender = document.getElementById('selectedgender')
+    const showingMembers = [...document.getElementsByClassName('member')].filter(member => !member.classList.contains('hide'))
+    const membersCount = showingMembers.length
+    logger('antal ' + membersCount)
 
-    const membersCount = notHiddenMembers.length
-    allaEllerEn.innerText = membersCount == 0 ? 'Inga ' : membersCount == 1 ? 'En ' : 'Alla '
-    selectedAge.innerText = sessionStorage.getItem('age') == 100 ? '' : sessionStorage.getItem('age') + (notHiddenMembers.length == 1 ? '-årig ' : '-åriga ')
+    allaEllerEn.innerText = membersCount == 1 ? 'En ' : membersCount
+    selectedAge.innerText = age == 100 ? '' : age + (membersCount == 1 ? '-årig ' : '-åriga ')
 
-    const gendersOfNotHiddenMembers = notHiddenMembers.map(member => member.getAttribute('data-gender'))
-    if (gendersOfNotHiddenMembers.length == 1) {
-        selectedGender.innerText = gendersOfNotHiddenMembers[0] == 'woman' ? 'kvinna' : 'man'
-    } else if ([...new Set(gendersOfNotHiddenMembers)].length == 1) {
-        selectedGender.innerText = gendersOfNotHiddenMembers[0] == 'woman' ? 'kvinnor' : 'män'
+    let genderOutput
+    if (membersCount < 1) {
+        genderOutput = 'kvinnor och män'
     } else {
-        selectedGender.innerText = 'kvinnor och män'
+        switch (gender) {
+            case 'woman':
+                genderOutput = membersCount > 1 ? 'kvinnor' : 'kvinna'
+                break
+            case 'both':
+                genderOutput = membersCount > 1 ? 'kvinnor och män' : showingMembers[0].getAttribute('data-gender') == 'woman' ? 'kvinna' : 'man'
+                break
+            case 'man':
+                genderOutput = membersCount > 1 ? 'män' : 'man'
+                break
+        }
     }
+    selectedGender.innerText = genderOutput
 }
