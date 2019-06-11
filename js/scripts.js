@@ -95,31 +95,41 @@ function outputText() {
     logger('>> outputText')
     const age = sessionStorage.getItem('age')
     const gender = sessionStorage.getItem('gender')
-    const allaEllerEn = document.getElementById('allaelleren')
-    const selectedAge = document.getElementById('selectedage')
-    const selectedGender = document.getElementById('selectedgender')
+    const sliderText = document.getElementById('slidertext')
     const showingMembers = [...document.getElementsByClassName('member')].filter(member => !member.classList.contains('hide'))
-    const membersCount = showingMembers.length
-    logger('antal ' + membersCount)
+    const womanCount = showingMembers.filter(member => member.getAttribute('data-gender') == 'woman').length
+    const manCount = showingMembers.filter(member => member.getAttribute('data-gender') == 'man').length
+    let outputText = ''
 
-    allaEllerEn.innerText = membersCount == 1 ? 'En ' : membersCount
-    selectedAge.innerText = age == 100 ? '' : age + (membersCount == 1 ? '-årig ' : '-åriga ')
+    logger(womanCount + ' ' + manCount)
 
-    let genderOutput
-    if (membersCount < 1) {
-        genderOutput = 'kvinnor och män'
-    } else {
-        switch (gender) {
-            case 'woman':
-                genderOutput = membersCount > 1 ? 'kvinnor' : 'kvinna'
-                break
-            case 'both':
-                genderOutput = membersCount > 1 ? 'kvinnor och män' : showingMembers[0].getAttribute('data-gender') == 'woman' ? 'kvinna' : 'man'
-                break
-            case 'man':
-                genderOutput = membersCount > 1 ? 'män' : 'man'
-                break
-        }
+    switch (gender) {
+        case 'woman':
+            outputText += womanCount == 1 ? 'en kvinna ' : womanCount + ' kvinnor '
+            break
+        case 'both':
+            if (womanCount > 0) {
+                outputText += womanCount == 1 ? 'en kvinna ' : womanCount + ' kvinnor '
+            }
+            if (womanCount > 0 && manCount > 0) {
+                outputText += ' och '
+            }
+            if (manCount > 0) {
+                outputText += manCount == 1 ? 'en man ' : manCount + ' män '
+            }
+            break
+        case 'man':
+            outputText += manCount == 1 ? 'en man ' : manCount + ' män '
+            break
     }
-    selectedGender.innerText = genderOutput
+
+    if (age != 100) {
+        outputText += 'som är ' + age + (womanCount + manCount == 1 ? ' år gammal' : ' år gamla')
+    }
+
+
+
+    logger(outputText)
+
+    sliderText.innerText = outputText
 }
