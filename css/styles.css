@@ -77,6 +77,7 @@ html body main #parliamentlist .member {
   flex-basis: 18vw;
   justify-content: space-between;
   max-width: 33vw;
+  max-height: 33vh;
   border: solid .1em;
   box-shadow: 0vh 0vw 1px 1px;
 }
@@ -113,8 +114,11 @@ html body main #parliamentlist .member.S::before {
   background-image: url(blommor/s.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .2em;
+  margin-left: .2em;
 }
 html body main #parliamentlist .member.M {
   background-color: #1B49DD;
@@ -125,8 +129,11 @@ html body main #parliamentlist .member.M::before {
   background-image: url(blommor/m.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .2em;
+  margin-left: .2em;
 }
 html body main #parliamentlist .member.SD {
   background-color: #DDDD00;
@@ -137,8 +144,11 @@ html body main #parliamentlist .member.SD::before {
   background-image: url(blommor/sd.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .3em;
+  margin-left: .3em;
 }
 html body main #parliamentlist .member.C {
   background-color: #009933;
@@ -149,8 +159,11 @@ html body main #parliamentlist .member.C::before {
   background-image: url(blommor/c.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .2em;
+  margin-left: .2em;
 }
 html body main #parliamentlist .member.L {
   background-color: #6BB7EC;
@@ -161,8 +174,11 @@ html body main #parliamentlist .member.L::before {
   background-image: url(blommor/l.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .3em;
+  margin-left: .3em;
 }
 html body main #parliamentlist .member.KD {
   background-color: #231977;
@@ -173,8 +189,11 @@ html body main #parliamentlist .member.KD::before {
   background-image: url(blommor/kd.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .2em;
+  margin-left: .2em;
 }
 html body main #parliamentlist .member.MP {
   background-color: #83CF39;
@@ -185,8 +204,11 @@ html body main #parliamentlist .member.MP::before {
   background-image: url(blommor/mp.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .2em;
+  margin-left: .2em;
 }
 html body main #parliamentlist .member.V {
   background-color: #AF0000;
@@ -197,8 +219,11 @@ html body main #parliamentlist .member.V::before {
   background-image: url(blommor/v.png);
   position: absolute;
   background-size: contain;
+  background-repeat: no-repeat;
   width: 2em;
   height: 2em;
+  margin-top: .3em;
+  margin-left: .3em;
 }
 html body main #parliamentlist .member.Vilde {
   background-color: white;
