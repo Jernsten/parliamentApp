@@ -21,41 +21,42 @@ html {
 html body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 html body main {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
+  height: 90%;
+  width: 100%;
 }
 html body main #headline {
-  position: absolute;
+  position: relative;
   margin: 0;
   padding: 0;
-  height: 10vh;
-  width: 100vw;
+  width: 100%;
   font-size: 5vw;
   text-align: center;
   padding-top: 0.5em;
 }
+html body main #headline span {
+  display: block;
+}
 html body main #parliamentlist {
+  position: relative;
   margin: 0;
   padding: 0;
-  height: 80vh;
-  width: 100vw;
-  position: relative;
-  top: 10vh;
-  bottom: 1vh;
+  height: 85%;
+  width: 100%;
+  top: 2em;
   display: flex;
   flex-flow: row wrap;
   flex-basis: 100%;
   align-content: space-evenly;
-  justify-content: space-evenly;
 }
 html body main #parliamentlist.showallages {
-  align-items: initial;
+  justify-content: space-evenly;
+  align-content: initial;
 }
 html body main #parliamentlist.showallages > .member {
   flex-basis: 4.5vw;
@@ -75,9 +76,9 @@ html body main #parliamentlist .member {
   list-style: none;
   flex-grow: 1;
   flex-basis: 18vw;
-  justify-content: space-between;
   max-width: 33vw;
   max-height: 33vh;
+  margin: auto;
   border: solid .1em;
   box-shadow: 0vh 0vw 1px 1px;
 }
@@ -97,7 +98,7 @@ html body main #parliamentlist .member .name {
   display: block;
   text-align: center;
   font-family: 'SF Compact Display Medium';
-  font-size: 5vw;
+  font-size: 4vw;
   width: 100%;
   color: white;
   text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5), 1px -1px 0 rgba(0, 0, 0, 0.5), -1px 1px 0 rgba(0, 0, 0, 0.5), 1px 1px 0 rgba(0, 0, 0, 0.5);
@@ -235,7 +236,7 @@ html body main #parliamentlist .member.Vilde::before {
   width: 2em;
   height: 2em;
 }
-html body #sliders {
+html body main #sliders {
   position: absolute;
   width: 100vw;
   height: 10vh;
@@ -244,40 +245,40 @@ html body #sliders {
   justify-content: space-evenly;
   flex-flow: wrap;
 }
-html body #sliders::before {
+html body main #sliders::before {
   content: 'Bläddra bland ålder och kön';
   min-width: 100%;
   display: block;
   text-align: center;
   font-size: 1.3em;
 }
-html body #sliders .slidercontainer {
+html body main #sliders .slidercontainer {
   min-width: 45vw;
   /*#############Thumb##############*/
   /*#############Track##############*/
 }
-html body #sliders .slidercontainer .slider {
+html body main #sliders .slidercontainer .slider {
   width: 100%;
   margin: 1vh 0 1vh 0;
 }
-html body #sliders .slidercontainer input[type=range] {
+html body main #sliders .slidercontainer input[type=range] {
   -webkit-appearance: none;
   width: 100%;
 }
-html body #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
+html body main #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-html body #sliders .slidercontainer input[type=range]:focus {
+html body main #sliders .slidercontainer input[type=range]:focus {
   outline: none;
 }
-html body #sliders .slidercontainer input[type=range]::-ms-track {
+html body main #sliders .slidercontainer input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
   background: transparent;
   border-color: transparent;
   color: transparent;
 }
-html body #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
+html body main #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 36px;
   width: 36px;
@@ -285,34 +286,34 @@ html body #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   margin-top: -12px;
 }
-html body #sliders .slidercontainer input[type=range]::-moz-range-thumb {
+html body main #sliders .slidercontainer input[type=range]::-moz-range-thumb {
   height: 36px;
   width: 36px;
   background: #555;
   cursor: pointer;
 }
-html body #sliders .slidercontainer input[type=range]::-ms-thumb {
+html body main #sliders .slidercontainer input[type=range]::-ms-thumb {
   height: 36px;
   width: 36px;
   background: #555;
   cursor: pointer;
 }
-html body #sliders .slidercontainer input[type=range]::-webkit-slider-runnable-track {
+html body main #sliders .slidercontainer input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 12px;
   cursor: pointer;
   background: #ccc;
 }
-html body #sliders .slidercontainer input[type=range]:active::-webkit-slider-runnable-track {
+html body main #sliders .slidercontainer input[type=range]:active::-webkit-slider-runnable-track {
   background: #d6d6d6;
 }
-html body #sliders .slidercontainer input[type=range]::-moz-range-track {
+html body main #sliders .slidercontainer input[type=range]::-moz-range-track {
   width: 100%;
   height: 12px;
   cursor: pointer;
   background: #ccc;
 }
-html body #sliders .slidercontainer input[type=range]::-ms-track {
+html body main #sliders .slidercontainer input[type=range]::-ms-track {
   width: 100%;
   height: 12px;
   cursor: pointer;
@@ -320,15 +321,15 @@ html body #sliders .slidercontainer input[type=range]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
-html body #sliders .slidercontainer input[type=range]::-ms-fill-lower {
+html body main #sliders .slidercontainer input[type=range]::-ms-fill-lower {
   background: #ccc;
 }
-html body #sliders .slidercontainer input[type=range]:focus::-ms-fill-lower {
+html body main #sliders .slidercontainer input[type=range]:focus::-ms-fill-lower {
   background: #ddd;
 }
-html body #sliders .slidercontainer input[type=range]::-ms-fill-upper {
+html body main #sliders .slidercontainer input[type=range]::-ms-fill-upper {
   background: #ccc;
 }
-html body #sliders .slidercontainer input[type=range]:focus::-ms-fill-upper {
+html body main #sliders .slidercontainer input[type=range]:focus::-ms-fill-upper {
   background: #ddd;
 }
