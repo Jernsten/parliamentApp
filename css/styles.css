@@ -38,6 +38,7 @@ html body main #headline {
   width: 100vw;
   font-size: 5vw;
   text-align: center;
+  padding-top: 0.5em;
 }
 html body main #parliamentlist {
   margin: 0;
@@ -45,7 +46,7 @@ html body main #parliamentlist {
   height: 80vh;
   width: 100vw;
   position: relative;
-  top: 7vh;
+  top: 10vh;
   bottom: 1vh;
   display: flex;
   flex-flow: row wrap;
@@ -56,21 +57,22 @@ html body main #parliamentlist {
 html body main #parliamentlist.showallages {
   align-items: initial;
 }
-html body main #parliamentlist.showallages .member {
+html body main #parliamentlist.showallages > .member {
   flex-basis: 4.5vw;
   border-radius: 0px;
   box-shadow: none;
 }
-html body main #parliamentlist.showallages .member .img {
+html body main #parliamentlist.showallages > .member::before {
+  display: none;
+}
+html body main #parliamentlist.showallages > .member .img {
   box-shadow: none;
 }
-html body main #parliamentlist.showallages .member span {
+html body main #parliamentlist.showallages > .member span {
   display: none;
 }
 html body main #parliamentlist .member {
   list-style: none;
-  display: flex;
-  flex-flow: column wrap;
   flex-grow: 1;
   flex-basis: 18vw;
   justify-content: space-between;
@@ -89,7 +91,6 @@ html body main #parliamentlist .member .img {
   background-position-y: 1%;
   padding-top: 120%;
   margin: 1% 1% 0 1%;
-  box-shadow: inset 0vh 0vw 1px 1px;
 }
 html body main #parliamentlist .member .name {
   display: block;
@@ -107,70 +108,151 @@ html body main #parliamentlist .member.S {
   background-color: #EE2020;
   border-color: #EE2020;
 }
+html body main #parliamentlist .member.S::before {
+  content: ' ';
+  background-image: url(blommor/s.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
+}
 html body main #parliamentlist .member.M {
   background-color: #1B49DD;
   border-color: #1B49DD;
+}
+html body main #parliamentlist .member.M::before {
+  content: ' ';
+  background-image: url(blommor/m.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
 }
 html body main #parliamentlist .member.SD {
   background-color: #DDDD00;
   border-color: #DDDD00;
 }
+html body main #parliamentlist .member.SD::before {
+  content: ' ';
+  background-image: url(blommor/sd.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
+}
 html body main #parliamentlist .member.C {
   background-color: #009933;
   border-color: #009933;
+}
+html body main #parliamentlist .member.C::before {
+  content: ' ';
+  background-image: url(blommor/c.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
 }
 html body main #parliamentlist .member.L {
   background-color: #6BB7EC;
   border-color: #6BB7EC;
 }
+html body main #parliamentlist .member.L::before {
+  content: ' ';
+  background-image: url(blommor/l.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
+}
 html body main #parliamentlist .member.KD {
   background-color: #231977;
   border-color: #231977;
+}
+html body main #parliamentlist .member.KD::before {
+  content: ' ';
+  background-image: url(blommor/kd.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
 }
 html body main #parliamentlist .member.MP {
   background-color: #83CF39;
   border-color: #83CF39;
 }
+html body main #parliamentlist .member.MP::before {
+  content: ' ';
+  background-image: url(blommor/mp.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
+}
 html body main #parliamentlist .member.V {
   background-color: #AF0000;
   border-color: #AF0000;
+}
+html body main #parliamentlist .member.V::before {
+  content: ' ';
+  background-image: url(blommor/v.png);
+  position: absolute;
+  background-size: contain;
+  width: 2em;
+  height: 2em;
 }
 html body main #parliamentlist .member.Vilde {
   background-color: white;
   border-color: white;
 }
-html #sliders {
+html body main #parliamentlist .member.Vilde::before {
+  content: 'Vilde';
+  position: absolute;
+  width: 2em;
+  height: 2em;
+}
+html body #sliders {
   position: absolute;
   width: 100vw;
   height: 10vh;
   bottom: 0vh;
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: wrap;
 }
-html #sliders .slidercontainer {
+html body #sliders::before {
+  content: 'Bläddra bland ålder och kön';
+  min-width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 1.3em;
+}
+html body #sliders .slidercontainer {
+  min-width: 45vw;
   /*#############Thumb##############*/
   /*#############Track##############*/
 }
-html #sliders .slidercontainer .slider {
+html body #sliders .slidercontainer .slider {
   width: 100%;
   margin: 1vh 0 1vh 0;
 }
-html #sliders .slidercontainer input[type=range] {
+html body #sliders .slidercontainer input[type=range] {
   -webkit-appearance: none;
   width: 100%;
 }
-html #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
+html body #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-html #sliders .slidercontainer input[type=range]:focus {
+html body #sliders .slidercontainer input[type=range]:focus {
   outline: none;
 }
-html #sliders .slidercontainer input[type=range]::-ms-track {
+html body #sliders .slidercontainer input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
   background: transparent;
   border-color: transparent;
   color: transparent;
 }
-html #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
+html body #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 36px;
   width: 36px;
@@ -178,34 +260,34 @@ html #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   margin-top: -12px;
 }
-html #sliders .slidercontainer input[type=range]::-moz-range-thumb {
+html body #sliders .slidercontainer input[type=range]::-moz-range-thumb {
   height: 36px;
   width: 36px;
   background: #555;
   cursor: pointer;
 }
-html #sliders .slidercontainer input[type=range]::-ms-thumb {
+html body #sliders .slidercontainer input[type=range]::-ms-thumb {
   height: 36px;
   width: 36px;
   background: #555;
   cursor: pointer;
 }
-html #sliders .slidercontainer input[type=range]::-webkit-slider-runnable-track {
+html body #sliders .slidercontainer input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 12px;
   cursor: pointer;
   background: #ccc;
 }
-html #sliders .slidercontainer input[type=range]:active::-webkit-slider-runnable-track {
+html body #sliders .slidercontainer input[type=range]:active::-webkit-slider-runnable-track {
   background: #d6d6d6;
 }
-html #sliders .slidercontainer input[type=range]::-moz-range-track {
+html body #sliders .slidercontainer input[type=range]::-moz-range-track {
   width: 100%;
   height: 12px;
   cursor: pointer;
   background: #ccc;
 }
-html #sliders .slidercontainer input[type=range]::-ms-track {
+html body #sliders .slidercontainer input[type=range]::-ms-track {
   width: 100%;
   height: 12px;
   cursor: pointer;
@@ -213,15 +295,15 @@ html #sliders .slidercontainer input[type=range]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
-html #sliders .slidercontainer input[type=range]::-ms-fill-lower {
+html body #sliders .slidercontainer input[type=range]::-ms-fill-lower {
   background: #ccc;
 }
-html #sliders .slidercontainer input[type=range]:focus::-ms-fill-lower {
+html body #sliders .slidercontainer input[type=range]:focus::-ms-fill-lower {
   background: #ddd;
 }
-html #sliders .slidercontainer input[type=range]::-ms-fill-upper {
+html body #sliders .slidercontainer input[type=range]::-ms-fill-upper {
   background: #ccc;
 }
-html #sliders .slidercontainer input[type=range]:focus::-ms-fill-upper {
+html body #sliders .slidercontainer input[type=range]:focus::-ms-fill-upper {
   background: #ddd;
 }
