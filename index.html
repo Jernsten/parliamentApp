@@ -1,33 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="se">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Document</title>
+  <title>Sveriges Riksdagsledamöter</title>
   <link rel="stylesheet" href="css/styles.css?v=1.0" />
 </head>
 
 <body>
   <main id="main">
+    <div id="headline"><span>I Sveriges Riksdag har vi </span><span id="slidertext">349 kvinnor och män</span></div>
+    <ul id="parliamentlist" class="showallages"></ul>
     <div id="sliders">
-      <label class="slidecontainer">
+      <div class="slidercontainer">
         <input type="range" min="0" class="slider" id="ageslider">
-      </label>
-
-      <label class="slidecontainer">
+      </div>
+      <div class="slidercontainer">
         <input type="range" min="0" max="2" value="1" class="slider" id="genderslider">
-      </label>
+      </div>
     </div>
-    <div id="headline">
-      <span>I Sveriges Riksdag har vi</span>
-      <span id="slidertext">349 kvinnor och män</span>
-    </div>
-    <ul id="parliamentlist"></ul>
-
   </main>
   <script src="js/scripts.js" type="module"></script>
 </body>
 
 </html>
+
+
+<!-- <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 300 24">
+  <text textLength="100%" x="5" y="14" style="
+    width: 100%;
+">Ebba Hermansson</text>
+
+
+</svg> -->

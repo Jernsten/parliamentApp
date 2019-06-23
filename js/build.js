@@ -55,11 +55,11 @@ class Parliament {
 class Member {
     constructor(firstName, lastName, born, gender, party, area, imgUrl) {
         logger('> Member.constructor')
-        this.name = `${firstName} ${lastName}`
+        this.name = `${firstName}`
         this.born = born
         this.age = thisYear - born
         this.gender = gender == 'man' ? 'man' : 'woman'
-        this.party = party
+        this.party = party == '-' ? 'vilde' : party
         this.area = area
         this.imgUrl = imgUrl
     }
@@ -67,41 +67,45 @@ class Member {
     toHTMLNode() {
         logger('> Member.toHTMLNode')
 
-        // Create <li> node and set member details
         const li = document.createElement('li')
-        li.classList.add('member', this.party, this.gender)
+        li.classList.add('member', this.party)
         li.setAttribute('data-age', this.age)
         li.setAttribute('data-gender', this.gender)
-        li.setAttribute('data-imgUrl', this.imgUrl)
 
-        // Create output <spans> with member details
-        const spanList =
-            [{ name: this.name },
-            { party: this.party },
-            { age: this.age },
-            { gender: this.gender }]
+        const imgDiv = document.createElement('div')
+        imgDiv.classList.add('img')
+        imgDiv.style.backgroundImage = `url('${this.imgUrl.replace('http', 'https')}')`
 
-        spanList.forEach(span => {
-            let aSpanNode = document.createElement('span')
-            let aSpanName = Object.getOwnPropertyNames(span)
-            aSpanNode.classList.add(aSpanName)
-            aSpanNode.innerText = span[aSpanName]
-            li.appendChild(aSpanNode)
-        })
+        li.appendChild(imgDiv)
 
-        // attach image of member
-        let img = document.createElement('img')
-        img.setAttribute('src', this.imgUrl)
-        li.appendChild(img)
+        const nameSpan = document.createElement('span')
+        nameSpan.classList.add('name')
+        nameSpan.innerText = this.name
+
+        li.appendChild(nameSpan)
 
         return li
+    }
+}
+
+function partyColor(party) {
+    switch (party) {
+        case 'M': return '#1B49DD'
+        case 'C': return '#009933'
+        case 'L': return '#6BB7EC'
+        case 'KD': return '#231977'
+        case 'MP': return '#83CF39'
+        case 'S': return '#EE2020'
+        case 'V': return '#AF0000'
+        case 'SD': return '#DDDD00'
+        default: return 'black'
     }
 }
 
 async function fetchData() {
     logger('>> > fetchData')
 
-    const url = 'http://data.riksdagen.se/personlista/?utformat=json'
+    const url = 'https://data.riksdagen.se/personlista/?utformat=json'
 
     const data = await fetch(url)
         .then(response => response.ok ? response.json() : Error('XXXX API response error'))

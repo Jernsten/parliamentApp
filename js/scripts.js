@@ -10,7 +10,7 @@ async function main() {
 
     if (parliament.members.length > 1) {
         display(parliament.members)
-        setupSlider()
+        setupAgeSlider()
         attachEventHandlers()
     } else {
         logger('Not going as planned here...')
@@ -28,8 +28,8 @@ function display(members) {
 }
 
 
-function setupSlider() {
-    logger('>> > setupSlider')
+function setupAgeSlider() {
+    logger('>> > setupAgeSlider')
 
     const slider = document.getElementById('ageslider')
     const gender = sessionStorage.getItem('gender')
@@ -43,9 +43,13 @@ function attachEventHandlers() {
 
     const ageSlider = document.getElementById('ageslider')
     ageSlider.oninput = function () {
-        logger('>> > ageSlider ' + ageSlider.steps[this.value] + ' år')
+        const age = this.steps[this.value]
+        logger('>> > ageSlider ' + age + ' år')
 
-        sessionStorage.setItem('age', ageSlider.steps[this.value])
+        sessionStorage.setItem('age', age)
+
+        const parliamentlist = document.getElementById('parliamentlist')
+        this.value == this.max ? parliamentlist.classList.add('showallages') : parliamentlist.classList.remove('showallages')
 
         update()
     }
@@ -65,7 +69,7 @@ function attachEventHandlers() {
                 sessionStorage.setItem('gender', 'man')
         }
 
-        setupSlider()
+        setupAgeSlider()
         update()
     }
 }
@@ -126,10 +130,6 @@ function outputText() {
     if (age != 100) {
         outputText += 'som är ' + age + (womanCount + manCount == 1 ? ' år gammal' : ' år gamla')
     }
-
-
-
-    logger(outputText)
 
     sliderText.innerText = outputText
 }
