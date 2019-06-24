@@ -47,6 +47,7 @@
                     font-size: 5vw;
                     text-align: center;
                     padding-top: 1em;
+                    z-index: 0;
 
                     span {
                         display: block;
@@ -58,20 +59,24 @@
                     position: fixed;
                     margin: 0;
                     padding: 0;
-                    height: 70%;
-                    width: 98%;
-                    top: 15%;
+                    height: 73%;
+                    width: 95%;
+                    top: 13%;
                     display: flex;
                     flex-flow: row wrap;
                     align-content: space-evenly;
                     transform: rotateY(5deg) translate(2vw);
+                    color: gray;
+                    filter: drop-shadow(-2vw 2vh 10px);
+                    z-index: 1;
 
                     &.showallages {
                         justify-content: space-evenly;
                         align-content: initial;
+                        filter: drop-shadow(-2vw 0vh 10px);
 
                         &>.member {
-                            flex-basis: 3.8vw;
+                            flex-basis: 3.6vw;
                             border-radius: 0px;
                             box-shadow: none;
 
@@ -300,7 +305,8 @@
                     justify-content: space-evenly;
                     flex-flow: wrap;
                     position: fixed;
-                    bottom: 1%;
+                    bottom: 3%;
+                    z-index: 0;
 
                     &::before {
                         content: 'Bläddra bland ålder och kön';
@@ -308,6 +314,7 @@
                         display: block;
                         text-align: center;
                         font-size: 1.3em;
+                        margin: 0 0 3% 0;
                     }
 
                     .slidercontainer {
