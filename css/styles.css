@@ -31,8 +31,9 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    width: 116%;
+    width: 100%;
     position: fixed;
+    perspective: 1000px;
   }
   html body main #headline {
     position: fixed;
@@ -51,18 +52,19 @@
     margin: 0;
     padding: 0;
     height: 70%;
-    width: 100%;
+    width: 98%;
     top: 15%;
     display: flex;
     flex-flow: row wrap;
     align-content: space-evenly;
+    transform: rotateY(5deg) translate(2vw);
   }
   html body main #parliamentlist.showallages {
     justify-content: space-evenly;
     align-content: initial;
   }
   html body main #parliamentlist.showallages > .member {
-    flex-basis: 3.9vw;
+    flex-basis: 3.8vw;
     border-radius: 0px;
     box-shadow: none;
   }
@@ -78,7 +80,7 @@
   html body main #parliamentlist .member {
     list-style: none;
     flex-grow: 1;
-    flex-basis: 18vw;
+    flex-basis: 15.3vw;
     max-width: 33vw;
     max-height: 33vh;
     margin: auto;
@@ -119,10 +121,10 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
-    margin-top: .2em;
-    margin-left: .2em;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
   }
   html body main #parliamentlist .member.M {
     background-color: #1B49DD;
@@ -134,10 +136,10 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
-    margin-top: .2em;
-    margin-left: .2em;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
   }
   html body main #parliamentlist .member.SD {
     background-color: #DDDD00;
@@ -149,10 +151,10 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
-    margin-top: .3em;
-    margin-left: .3em;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
   }
   html body main #parliamentlist .member.C {
     background-color: #009933;
@@ -164,10 +166,10 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
-    margin-top: .2em;
-    margin-left: .2em;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
   }
   html body main #parliamentlist .member.L {
     background-color: #6BB7EC;
@@ -179,10 +181,10 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
-    margin-top: .3em;
-    margin-left: .3em;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
   }
   html body main #parliamentlist .member.KD {
     background-color: #231977;
@@ -194,8 +196,8 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
+    width: 1em;
+    height: 1em;
     margin-top: .2em;
     margin-left: .2em;
   }
@@ -209,10 +211,10 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
-    margin-top: .2em;
-    margin-left: .2em;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
   }
   html body main #parliamentlist .member.V {
     background-color: #AF0000;
@@ -224,10 +226,10 @@
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 2em;
-    height: 2em;
-    margin-top: .3em;
-    margin-left: .3em;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
   }
   html body main #parliamentlist .member.Vilde {
     background-color: white;
@@ -236,7 +238,6 @@
   html body main #parliamentlist .member.Vilde::before {
     content: 'Vilde';
     position: absolute;
-    width: 2em;
     height: 2em;
   }
   html body main #sliders {
