@@ -34,9 +34,10 @@
                 margin: 0;
                 padding: 0;
                 height: 100%;
-                width: 100%;
-                overflow: hidden;
+                width: 116%;
                 position: fixed;
+                // perspective: 1000px;
+                // transform: rotateY(35deg) translateX(-10vw);
 
                 #headline {
                     position: fixed;
@@ -55,11 +56,11 @@
                 // Flex Container
                 #parliamentlist {
                     position: fixed;
-                    margin: 5% 0 5% 0;
+                    margin: 0;
                     padding: 0;
                     height: 70%;
                     width: 100%;
-                    top: 10%;
+                    top: 15%;
                     display: flex;
                     flex-flow: row wrap;
                     // flex-basis: 100%;
@@ -70,7 +71,7 @@
                         align-content: initial;
 
                         &>.member {
-                            flex-basis: 4vw;
+                            flex-basis: 3.9vw;
                             border-radius: 0px;
                             box-shadow: none;
 
@@ -303,7 +304,7 @@
                     justify-content: space-evenly;
                     flex-flow: wrap;
                     position: fixed;
-                    bottom: 7%;
+                    bottom: 1%;
 
                     &::before {
                         content: 'Bläddra bland ålder och kön';
