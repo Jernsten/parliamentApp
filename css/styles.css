@@ -60,13 +60,11 @@
     align-content: space-evenly;
     transform: rotateY(5deg) translate(2vw);
     color: gray;
-    filter: drop-shadow(-2vw 2vh 10px);
     z-index: 1;
   }
   html body main #parliamentlist.showallages {
     justify-content: space-evenly;
     align-content: initial;
-    filter: drop-shadow(-2vw 0vh 10px);
   }
   html body main #parliamentlist.showallages > .member {
     flex-basis: 3.6vw;
@@ -115,6 +113,9 @@
     height: fit-content;
     padding-top: .5em;
     padding-bottom: 0.3em;
+  }
+  html body main #parliamentlist .member .infobox {
+    display: none;
   }
   html body main #parliamentlist .member.S {
     background-color: #EE2020;

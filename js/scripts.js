@@ -9,22 +9,27 @@ async function main() {
     const parliament = await init()
 
     if (parliament.members.length > 1) {
-        display(parliament.members)
+        await display(parliament.members)
         setupAgeSlider()
-        attachEventHandlers()
+        attachSliderHandlers()
     } else {
-        logger('Not going as planned here...')
+        console.log('Not going as planned here...')
     }
 }
 
 main()
 
-function display(members) {
+async function display(members) {
     logger('>> > display')
 
+    const parliamentList = document.getElementById('parliamentlist')
     members.forEach(member => {
-        document.getElementById('parliamentlist').appendChild(member.toHTMLNode())
+        const memberLi = member.toHTMLNode()
+        memberLi.addEventListener('click', showMore, false)
+        parliamentList.appendChild(memberLi)
     })
+
+    return true
 }
 
 
@@ -38,8 +43,8 @@ function setupAgeSlider() {
     slider.max = slider.steps.length - 1
 }
 
-function attachEventHandlers() {
-    logger('>> > attachEventHandlers')
+function attachSliderHandlers() {
+    logger('>> > attachSliderHandlers')
 
     const ageSlider = document.getElementById('ageslider')
     ageSlider.oninput = function () {
@@ -71,6 +76,15 @@ function attachEventHandlers() {
 
         setupAgeSlider()
         update()
+    }
+}
+
+function showMore(event) {
+    logger('>> > showMore')
+
+    // if a member was clicked (and not on negative space)
+    if (event.target !== event.currentTarget) {
+        logger(event.target)
     }
 }
 

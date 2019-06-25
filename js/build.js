@@ -55,7 +55,8 @@ class Parliament {
 class Member {
     constructor(firstName, lastName, born, gender, party, area, imgUrl) {
         logger('> Member.constructor')
-        this.name = `${firstName}`
+        this.firstName = firstName
+        this.fullName = `${firstName} ${lastName}`
         this.born = born
         this.age = thisYear - born
         this.gender = gender == 'man' ? 'man' : 'woman'
@@ -80,25 +81,34 @@ class Member {
 
         const nameSpan = document.createElement('span')
         nameSpan.classList.add('name')
-        nameSpan.innerText = this.name
-
+        nameSpan.innerText = this.firstName
         li.appendChild(nameSpan)
 
+        const infoBox = this.createInfoBox()
+
+        li.appendChild(infoBox)
+        
         return li
     }
-}
 
-function partyColor(party) {
-    switch (party) {
-        case 'M': return '#1B49DD'
-        case 'C': return '#009933'
-        case 'L': return '#6BB7EC'
-        case 'KD': return '#231977'
-        case 'MP': return '#83CF39'
-        case 'S': return '#EE2020'
-        case 'V': return '#AF0000'
-        case 'SD': return '#DDDD00'
-        default: return 'black'
+    createInfoBox() {
+        const div = document.createElement('div')
+        div.classList.add('infobox', 'hide')
+
+        const spans = {
+            name: this.fullName,
+            born: this.born,
+            area: this.area
+        }
+
+        for (let span in spans) {
+            const aSpan = document.createElement('span')
+            aSpan.classList.add(span)
+            aSpan.innerText = spans[name]
+            div.appendChild(aSpan)
+        }
+
+        return div
     }
 }
 
