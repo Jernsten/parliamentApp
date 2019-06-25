@@ -21,7 +21,7 @@ class Parliament {
                 person.kon,
                 person.parti,
                 person.valkrets,
-                person.bild_url_192,
+                person.bild_url_80,
             ))
         })
         return members
