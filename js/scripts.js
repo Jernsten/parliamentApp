@@ -90,6 +90,7 @@ function showMore(event) {
     everything.classList.add('pushaside')
 
     const memberCard = document.getElementById('membercard')
+    memberCard.firstChild && memberCard.removeChild(memberCard.firstChild)
     memberCard.appendChild(member.cloneNode(true))
     memberCard.classList.remove('slideout')
     memberCard.classList.add('slidein')
@@ -108,11 +109,11 @@ function backToMainView() {
     memberCard.removeEventListener('click', backToMainView, false)
     memberCard.classList.replace('slidein', 'slideout')
     setTimeout(function () {
-        memberCard.removeChild(memberCard.firstChild)
+        memberCard.removeChild(memberCard.firstChild) && memberCard.firstChild && memberCard.removeChild(memberCard.firstChild)
     }, 1000)
 
     const everything = document.getElementById('main')
-    everything.classList.replace('pushaside','pullback')
+    everything.classList.replace('pushaside', 'pullback')
 
 }
 function update() {
