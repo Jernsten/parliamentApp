@@ -311,6 +311,7 @@
     margin-top: -12px;
     background: url('genders.svg');
     background-size: 100%;
+    border: 0;
   }
   html body main #sliders .slidecontainer:last-child input[type=range]::-moz-range-thumb {
     height: 36px;
