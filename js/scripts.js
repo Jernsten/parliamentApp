@@ -1,3 +1,20 @@
+/*
+
+Parliament App
+Date: 20190627
+
+Creator: Kemal Demirtas (demirtas.kemal@outlook.com)
+
+
+This app is designed and tested for mobile and tablet screens,
+such as standard iPhone, Samsung, Pixel devices.
+
+Only tested on Safari and Chrome.
+
+
+No frameworks.
+ */
+
 import { init, logger } from './build.js'
 
 // Turn on and off logging to console
@@ -109,8 +126,10 @@ function backToMainView() {
     memberCard.removeEventListener('click', backToMainView, false)
     memberCard.classList.replace('slidein', 'slideout')
     setTimeout(function () {
-        memberCard.removeChild(memberCard.firstChild) && memberCard.firstChild && memberCard.removeChild(memberCard.firstChild)
-    }, 1000)
+        memberCard.removeChild(memberCard.firstChild) &&
+            memberCard.firstChild &&
+            memberCard.removeChild(memberCard.firstChild)
+    }, 300)
 
     const everything = document.getElementById('main')
     everything.classList.replace('pushaside', 'pullback')
@@ -124,7 +143,6 @@ function update() {
 
     logger('FILTER ' + age + ' ' + gender + '     >>>>>>>>>>>')
 
-    // Show or hide members
     members.forEach(member => {
         if ((age == 100 || member.getAttribute('data-age') == age) &&
             (gender == 'both' || member.getAttribute('data-gender') == gender)) {
