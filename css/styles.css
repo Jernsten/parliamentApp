@@ -232,7 +232,7 @@
     cursor: pointer;
     margin-top: -12px;
     background: url('age.svg');
-    background-size: 100%;
+    background-size: 103%;
   }
   html body main #sliders .slidecontainer:first-child input[type=range]::-moz-range-thumb {
     height: 36px;
