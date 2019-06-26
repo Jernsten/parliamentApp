@@ -10,8 +10,6 @@ async function main() {
 
     if (parliament.members.length > 1) {
         await display(parliament.members)
-        setupAgeSlider()
-        attachSliderHandlers()
     } else {
         console.log('Not going as planned here...')
     }
@@ -28,6 +26,9 @@ async function display(members) {
         memberLi.addEventListener('click', showMore, false)
         parliamentList.appendChild(memberLi)
     })
+
+    setupAgeSlider()
+    attachSliderHandlers()
 
     return true
 }
