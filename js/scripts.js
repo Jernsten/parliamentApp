@@ -1,7 +1,7 @@
 import { init, logger } from './build.js'
 
 // Turn on and off logging to console
-export const isLogging = true
+export const isLogging = false
 
 async function main() {
     logger('>> > main')

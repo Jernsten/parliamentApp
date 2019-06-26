@@ -35,11 +35,11 @@
     left: 100%;
   }
   html body #membercard.slidein {
-    transition: 0.6s ease-out;
+    transition: 0.3s ease-out;
     left: 5vw;
   }
   html body #membercard.slideout {
-    transition: 0.6s ease-out;
+    transition: 0.3s ease-out;
     left: 110%;
   }
   html body #membercard .member {
@@ -95,7 +95,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    transition: 0.8s ease-out;
+    transition: 0.5s ease-out;
   }
   html body main.pushaside {
     transform: translateX(-80%);
