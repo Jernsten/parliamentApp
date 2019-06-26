@@ -26,14 +26,84 @@
     height: 100%;
     width: 100%;
     position: fixed;
+    perspective: 1000px;
+  }
+  html body #membercard {
+    position: fixed;
+    top: 20vh;
+    width: 90%;
+    left: 100%;
+  }
+  html body #membercard.slidein {
+    transition: 0.6s ease-out;
+    left: 5vw;
+  }
+  html body #membercard.slideout {
+    transition: 0.6s ease-out;
+    left: 110%;
+  }
+  html body #membercard .member {
+    list-style: none;
+    box-shadow: 0vh 0vw 1px 1px;
+    overflow: hidden;
+    display: flex;
+    border: solid;
+    border-width: .3em;
+  }
+  html body #membercard .member::before {
+    width: 3em;
+    height: 3em;
+    margin-top: 0.1em;
+    margin-left: 0.1em;
+  }
+  html body #membercard .member .img {
+    min-width: 190px;
+    min-height: 270px;
+    background-size: 110%;
+  }
+  html body #membercard .member .name {
+    display: none;
+  }
+  html body #membercard .member .infobox {
+    display: block;
+    padding-left: 6%;
+    color: white;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5), 1px -1px 0 rgba(0, 0, 0, 0.5), -1px 1px 0 rgba(0, 0, 0, 0.5), 1px 1px 0 rgba(0, 0, 0, 0.5);
+  }
+  html body #membercard .member .infobox .name {
+    display: block;
+    margin-bottom: 4em;
+    margin-top: 2.5em;
+    font-size: 1.3em;
+  }
+  html body #membercard .member .infobox .born {
+    display: block;
+    margin-bottom: .5em;
+  }
+  html body #membercard .member .infobox .born::before {
+    content: 'Född år ';
+  }
+  html body #membercard .member .infobox .area {
+    display: block;
+  }
+  html body #membercard .member .infobox .area::before {
+    content: 'Valkrets ';
   }
   html body main {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    position: fixed;
-    perspective: 1000px;
+    position: absolute;
+    transition: 0.8s ease-out;
+  }
+  html body main.pushaside {
+    transform: translateX(-80%);
+    opacity: 0.5;
+  }
+  html body main.pullback {
+    transform: translateX(0);
+    opacity: 1;
   }
   html body main #headline {
     position: fixed;
@@ -50,15 +120,14 @@
   }
   html body main #parliamentlist {
     position: fixed;
-    margin: 0;
+    margin: 0 2vw;
     padding: 0;
     height: 73%;
-    width: 95%;
+    width: 96%;
     top: 13%;
     display: flex;
     flex-flow: row wrap;
     align-content: space-evenly;
-    transform: rotateY(5deg) translate(2vw);
     color: gray;
     z-index: 1;
   }
@@ -84,8 +153,8 @@
     list-style: none;
     flex-grow: 1;
     flex-basis: 15.3vw;
-    max-width: 33vw;
-    max-height: 33vh;
+    max-width: 25vw;
+    max-height: 27vh;
     margin: auto;
     border: solid .1em;
     box-shadow: 0vh 0vw 1px 1px;
@@ -116,135 +185,6 @@
   }
   html body main #parliamentlist .member .infobox {
     display: none;
-  }
-  html body main #parliamentlist .member.S {
-    background-color: #EE2020;
-    border-color: #EE2020;
-  }
-  html body main #parliamentlist .member.S::before {
-    content: ' ';
-    background-image: url(blommor/s.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .1em;
-    margin-left: .1em;
-  }
-  html body main #parliamentlist .member.M {
-    background-color: #1B49DD;
-    border-color: #1B49DD;
-  }
-  html body main #parliamentlist .member.M::before {
-    content: ' ';
-    background-image: url(blommor/m.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .1em;
-    margin-left: .1em;
-  }
-  html body main #parliamentlist .member.SD {
-    background-color: #DDDD00;
-    border-color: #DDDD00;
-  }
-  html body main #parliamentlist .member.SD::before {
-    content: ' ';
-    background-image: url(blommor/sd.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .1em;
-    margin-left: .1em;
-  }
-  html body main #parliamentlist .member.C {
-    background-color: #009933;
-    border-color: #009933;
-  }
-  html body main #parliamentlist .member.C::before {
-    content: ' ';
-    background-image: url(blommor/c.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .1em;
-    margin-left: .1em;
-  }
-  html body main #parliamentlist .member.L {
-    background-color: #6BB7EC;
-    border-color: #6BB7EC;
-  }
-  html body main #parliamentlist .member.L::before {
-    content: ' ';
-    background-image: url(blommor/l.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .1em;
-    margin-left: .1em;
-  }
-  html body main #parliamentlist .member.KD {
-    background-color: #231977;
-    border-color: #231977;
-  }
-  html body main #parliamentlist .member.KD::before {
-    content: ' ';
-    background-image: url(blommor/kd.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .2em;
-    margin-left: .2em;
-  }
-  html body main #parliamentlist .member.MP {
-    background-color: #83CF39;
-    border-color: #83CF39;
-  }
-  html body main #parliamentlist .member.MP::before {
-    content: ' ';
-    background-image: url(blommor/mp.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .1em;
-    margin-left: .1em;
-  }
-  html body main #parliamentlist .member.V {
-    background-color: #AF0000;
-    border-color: #AF0000;
-  }
-  html body main #parliamentlist .member.V::before {
-    content: ' ';
-    background-image: url(blommor/v.png);
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 1em;
-    height: 1em;
-    margin-top: .1em;
-    margin-left: .1em;
-  }
-  html body main #parliamentlist .member.Vilde {
-    background-color: white;
-    border-color: white;
-  }
-  html body main #parliamentlist .member.Vilde::before {
-    content: 'Vilde';
-    position: absolute;
-    height: 2em;
   }
   html body main #sliders {
     width: 100vw;
@@ -344,5 +284,136 @@
   }
   html body main #sliders .slidercontainer input[type=range]:focus::-ms-fill-upper {
     background: #ddd;
+  }
+  html body .S {
+    background-color: #EE2020;
+    border-color: #EE2020 !important;
+  }
+  html body .S::before {
+    content: ' ';
+    background-image: url(blommor/s.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
+  }
+  html body .M {
+    background-color: #1B49DD;
+    border-color: #1B49DD !important;
+  }
+  html body .M::before {
+    content: ' ';
+    background-image: url(blommor/m.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
+  }
+  html body .SD {
+    background-color: #DDDD00;
+    border-color: #DDDD00 !important;
+  }
+  html body .SD::before {
+    content: ' ';
+    background-image: url(blommor/sd.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
+  }
+  html body .C {
+    background-color: #009933;
+    border-color: #009933 !important;
+  }
+  html body .C::before {
+    content: ' ';
+    background-image: url(blommor/c.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
+  }
+  html body .L {
+    background-color: #6BB7EC;
+    border-color: #6BB7EC !important;
+  }
+  html body .L::before {
+    content: ' ';
+    background-image: url(blommor/l.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
+  }
+  html body .KD {
+    background-color: #231977;
+    border-color: #231977 !important;
+  }
+  html body .KD::before {
+    content: ' ';
+    background-image: url(blommor/kd.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .2em;
+    margin-left: .2em;
+  }
+  html body .MP {
+    background-color: #83CF39;
+    border-color: #83CF39 !important;
+  }
+  html body .MP::before {
+    content: ' ';
+    background-image: url(blommor/mp.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
+  }
+  html body .V {
+    background-color: #AF0000;
+    border-color: #AF0000 !important;
+  }
+  html body .V::before {
+    content: ' ';
+    background-image: url(blommor/v.png);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1em;
+    height: 1em;
+    margin-top: .1em;
+    margin-left: .1em;
+  }
+  html body .VILDE {
+    background-color: white;
+    border-color: white !important;
+  }
+  html body .VILDE::before {
+    content: 'VILDE';
+    color: black;
+    font-size: 0.7em;
+    position: absolute;
+    height: 2em;
   }
 }

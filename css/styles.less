@@ -29,15 +29,108 @@
             height: 100%;
             width: 100%;
             position: fixed;
+            perspective: 1000px;
+
+            #membercard {
+                position: fixed;
+                top: 20vh;
+                width: 90%;
+                left: 100%;
+
+                &.slidein {
+                    transition: .6s ease-out;
+                    left: 5vw;
+                }
+
+                &.slideout {
+                    transition: .6s ease-out;
+                    left: 110%;
+                }
+
+                .member {
+                    list-style: none;
+                    box-shadow: 0vh 0vw 1px 1px;
+                    overflow: hidden;
+                    display: flex;
+                    border: solid;
+                    border-width: .3em;
+
+                    &::before {
+                        width: 3em;
+                        height: 3em;
+                        margin-top: 0.1em;
+                        margin-left: 0.1em;
+                    }
+
+                    // div.img
+                    .img {
+                        min-width: 190px;
+                        min-height: 270px;
+                        background-size: 110%;
+                    }
+
+                    .name {
+                        display: none;
+                    }
+
+                    .infobox {
+                        display: block;
+                        // flex-flow: column;
+                        // justify-content: center;
+                        padding-left: 6%;
+                        color: white;
+                        text-shadow:
+                            -1px -1px 0 rgba(0, 0, 0, 0.5),
+                            1px -1px 0 rgba(0, 0, 0, 0.5),
+                            -1px 1px 0 rgba(0, 0, 0, 0.5),
+                            1px 1px 0 rgba(0, 0, 0, 0.5);
+
+                        .name {
+                            display: block;
+                            margin-bottom: 4em;
+                            margin-top: 2.5em;
+                            font-size: 1.3em;
+                        }
+
+                        .born {
+                            display: block;
+                            margin-bottom: .5em;
+
+                            &::before {
+                                content: 'Född år ';
+                            }
+                        }
+
+                        .area {
+                            display: block;
+
+                            &::before {
+                                content: 'Valkrets ';
+                            }
+                        }
+
+
+                    }
+                }
+            }
 
             main {
                 margin: 0;
                 padding: 0;
                 height: 100%;
                 width: 100%;
-                position: fixed;
-                perspective: 1000px;
-                // transform: rotateY(35deg) translateX(-10vw);
+                position: absolute;
+                transition: .8s ease-out;
+
+                &.pushaside {
+                    transform: translateX(-80%);
+                    opacity: 0.5;
+                }
+
+                &.pullback {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
 
                 #headline {
                     position: fixed;
@@ -57,15 +150,15 @@
                 // Flex Container
                 #parliamentlist {
                     position: fixed;
-                    margin: 0;
+                    margin: 0 2vw;
                     padding: 0;
                     height: 73%;
-                    width: 95%;
+                    width: 96%;
                     top: 13%;
                     display: flex;
                     flex-flow: row wrap;
                     align-content: space-evenly;
-                    transform: rotateY(5deg) translate(2vw);
+                    // transform: rotateY(5deg) translate(2vw);
                     color: gray;
                     // filter: drop-shadow(-2vw 2vh 10px);
                     z-index: 1;
@@ -104,8 +197,8 @@
                         list-style: none;
                         flex-grow: 1;
                         flex-basis: 15.3vw;
-                        max-width: 33vw;
-                        max-height: 33vh;
+                        max-width: 25vw;
+                        max-height: 27vh;
                         margin: auto;
                         border: solid .1em;
                         box-shadow: 0vh 0vw 1px 1px;
@@ -145,160 +238,6 @@
                             display: none;
                         }
 
-                        &.S {
-                            @S: #EE2020;
-                            background-color: @S;
-                            border-color: @S;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/s.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .1em;
-                                margin-left: .1em;
-                            }
-                        }
-
-                        &.M {
-                            @M: #1B49DD;
-                            background-color: @M;
-                            border-color: @M;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/m.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .1em;
-                                margin-left: .1em;
-                            }
-                        }
-
-                        &.SD {
-                            @SD: #DDDD00;
-                            background-color: @SD;
-                            border-color: @SD;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/sd.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .1em;
-                                margin-left: .1em;
-                            }
-                        }
-
-                        &.C {
-                            @C: #009933;
-                            background-color: @C;
-                            border-color: @C;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/c.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .1em;
-                                margin-left: .1em;
-                            }
-                        }
-
-                        &.L {
-                            @L: #6BB7EC;
-                            background-color: @L;
-                            border-color: @L;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/l.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .1em;
-                                margin-left: .1em;
-                            }
-                        }
-
-                        &.KD {
-                            @KD: #231977;
-                            background-color: @KD;
-                            border-color: @KD;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/kd.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .2em;
-                                margin-left: .2em;
-                            }
-                        }
-
-                        &.MP {
-                            @MP: #83CF39;
-                            background-color: @MP;
-                            border-color: @MP;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/mp.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .1em;
-                                margin-left: .1em;
-                            }
-                        }
-
-                        &.V {
-                            @V: #AF0000;
-                            background-color: @V;
-                            border-color: @V;
-
-                            &::before {
-                                content: ' ';
-                                background-image: url(blommor/v.png);
-                                position: absolute;
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                width: 1em;
-                                height: 1em;
-                                margin-top: .1em;
-                                margin-left: .1em;
-                            }
-                        }
-
-                        &.Vilde {
-                            background-color: white;
-                            border-color: white;
-
-                            &::before {
-                                content: 'Vilde';
-                                position: absolute;
-                                height: 2em;
-                            }
-                        }
                     }
                 }
 
@@ -424,6 +363,164 @@
                     }
                 }
             }
+
+            .S {
+                @S: #EE2020;
+                background-color: @S;
+                border-color: @S  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/s.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .1em;
+                    margin-left: .1em;
+                }
+            }
+
+            .M {
+                @M: #1B49DD;
+                background-color: @M;
+                border-color: @M  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/m.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .1em;
+                    margin-left: .1em;
+                }
+            }
+
+            .SD {
+                @SD: #DDDD00;
+                background-color: @SD;
+                border-color: @SD  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/sd.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .1em;
+                    margin-left: .1em;
+                }
+            }
+
+            .C {
+                @C: #009933;
+                background-color: @C;
+                border-color: @C  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/c.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .1em;
+                    margin-left: .1em;
+                }
+            }
+
+            .L {
+                @L: #6BB7EC;
+                background-color: @L;
+                border-color: @L  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/l.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .1em;
+                    margin-left: .1em;
+                }
+            }
+
+            .KD {
+                @KD: #231977;
+                background-color: @KD;
+                border-color: @KD  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/kd.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .2em;
+                    margin-left: .2em;
+                }
+            }
+
+            .MP {
+                @MP: #83CF39;
+                background-color: @MP;
+                border-color: @MP  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/mp.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .1em;
+                    margin-left: .1em;
+                }
+            }
+
+            .V {
+                @V: #AF0000;
+                background-color: @V;
+                border-color: @V  !important;
+
+                &::before {
+                    content: ' ';
+                    background-image: url(blommor/v.png);
+                    position: absolute;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: .1em;
+                    margin-left: .1em;
+                }
+            }
+
+            .VILDE {
+                background-color: white;
+                border-color: white !important;
+
+                &::before {
+                    content: 'VILDE';
+                    color: black;
+                    font-size: 0.7em;
+                    position: absolute;
+                    height: 2em;
+                }
+            }
+
         }
     }
 }

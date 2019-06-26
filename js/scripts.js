@@ -83,12 +83,38 @@ function attachSliderHandlers() {
 function showMore(event) {
     logger('>> > showMore')
 
-    // if a member was clicked (and not on negative space)
-    if (event.target !== event.currentTarget) {
-        logger(event.target)
-    }
+    const member = event.currentTarget
+
+    const everything = document.getElementById('main')
+    everything.classList.remove('pullback')
+    everything.classList.add('pushaside')
+
+    const memberCard = document.getElementById('membercard')
+    memberCard.appendChild(member.cloneNode(true))
+    memberCard.classList.remove('slideout')
+    memberCard.classList.add('slidein')
+
+    waitForTap()
 }
 
+function waitForTap() {
+    logger('>> > waitForTap')
+    const memberCard = document.getElementById('membercard')
+    memberCard.addEventListener('click', backToMainView, false)
+}
+function backToMainView() {
+    logger('>> backToMainView')
+    const memberCard = document.getElementById('membercard')
+    memberCard.removeEventListener('click', backToMainView, false)
+    memberCard.classList.replace('slidein', 'slideout')
+    setTimeout(function () {
+        memberCard.removeChild(memberCard.firstChild)
+    }, 1000)
+
+    const everything = document.getElementById('main')
+    everything.classList.replace('pushaside','pullback')
+
+}
 function update() {
     logger('>> update')
     const age = sessionStorage.getItem('age')

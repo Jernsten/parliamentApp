@@ -56,11 +56,11 @@ class Member {
     constructor(firstName, lastName, born, gender, party, area, imgUrl) {
         logger('> Member.constructor')
         this.firstName = firstName
-        this.fullName = `${firstName} ${lastName}`
+        this.lastName = lastName
         this.born = born
         this.age = thisYear - born
         this.gender = gender == 'man' ? 'man' : 'woman'
-        this.party = party == '-' ? 'vilde' : party
+        this.party = party == '-' ? 'VILDE' : party
         this.area = area
         this.imgUrl = imgUrl
     }
@@ -87,7 +87,7 @@ class Member {
         const infoBox = this.createInfoBox()
 
         li.appendChild(infoBox)
-        
+
         return li
     }
 
@@ -96,7 +96,7 @@ class Member {
         div.classList.add('infobox', 'hide')
 
         const spans = {
-            name: this.fullName,
+            name: `${this.firstName} ${this.lastName}`,
             born: this.born,
             area: this.area
         }
@@ -104,7 +104,7 @@ class Member {
         for (let span in spans) {
             const aSpan = document.createElement('span')
             aSpan.classList.add(span)
-            aSpan.innerText = spans[name]
+            aSpan.innerText = spans[span]
             div.appendChild(aSpan)
         }
 
@@ -118,9 +118,9 @@ async function fetchData() {
     const url = 'https://data.riksdagen.se/personlista/?utformat=json'
 
     const data = await fetch(url)
-        .then(response => response.ok ? response.json() : Error('XXXX API response error'))
+        .then(response => response.ok ? response.json() : (logger('problems') && Error('XXXX API response error')))
         .catch(async error => {
-            logger(`XXXX fetchParliamentData.catch, Error: ${error.message}`)
+            logger(`XXXX fetchParliamentData.catch, Error: ${error.message}, using local snapshot`)
 
             return await fetch('json/snapshot.json').then(localSnapshot => localSnapshot.json());
         })
