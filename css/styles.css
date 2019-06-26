@@ -110,7 +110,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    font-size: 5vw;
+    font-size: 1.2em;
     text-align: center;
     padding-top: 1em;
     z-index: 0;
@@ -122,7 +122,7 @@
     position: fixed;
     margin: 0 2vw;
     padding: 0;
-    height: 73%;
+    height: 77%;
     width: 96%;
     top: 13%;
     display: flex;
@@ -154,7 +154,7 @@
     flex-grow: 1;
     flex-basis: 15.3vw;
     max-width: 25vw;
-    max-height: 27vh;
+    max-height: 30vh;
     margin: auto;
     border: solid .1em;
     box-shadow: 0vh 0vw 1px 1px;
@@ -175,7 +175,7 @@
     display: block;
     text-align: center;
     font-family: 'SF Compact Display Medium';
-    font-size: 4vw;
+    font-size: 1em;
     width: 100%;
     color: white;
     text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.5), 1px -1px 0 rgba(0, 0, 0, 0.5), -1px 1px 0 rgba(0, 0, 0, 0.5), 1px 1px 0 rgba(0, 0, 0, 0.5);
@@ -188,7 +188,7 @@
   }
   html body main #sliders {
     width: 100vw;
-    height: 10vh;
+    height: 5vh;
     display: flex;
     justify-content: space-evenly;
     flex-flow: wrap;
@@ -196,76 +196,72 @@
     bottom: 3%;
     z-index: 0;
   }
-  html body main #sliders::before {
-    content: 'Bläddra bland ålder och kön';
-    min-width: 100%;
-    display: block;
-    text-align: center;
-    font-size: 1.3em;
-    margin: 0 0 3% 0;
-  }
-  html body main #sliders .slidercontainer {
+  html body main #sliders .slidecontainer {
     min-width: 45vw;
+  }
+  html body main #sliders .slidecontainer .slider {
+    width: 100%;
+    margin: 1vh 0 1vh 0;
+    opacity: 0.8;
+  }
+  html body main #sliders .slidecontainer:first-child {
     /*#############Thumb##############*/
     /*#############Track##############*/
   }
-  html body main #sliders .slidercontainer .slider {
-    width: 100%;
-    margin: 1vh 0 1vh 0;
-  }
-  html body main #sliders .slidercontainer input[type=range] {
+  html body main #sliders .slidecontainer:first-child input[type=range] {
     -webkit-appearance: none;
     width: 100%;
   }
-  html body main #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
   }
-  html body main #sliders .slidercontainer input[type=range]:focus {
+  html body main #sliders .slidecontainer:first-child input[type=range]:focus {
     outline: none;
   }
-  html body main #sliders .slidercontainer input[type=range]::-ms-track {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-ms-track {
     width: 100%;
     cursor: pointer;
     background: transparent;
     border-color: transparent;
     color: transparent;
   }
-  html body main #sliders .slidercontainer input[type=range]::-webkit-slider-thumb {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 36px;
     width: 36px;
-    background: #555;
     cursor: pointer;
     margin-top: -12px;
+    background: url('age.svg');
+    background-size: 100%;
   }
-  html body main #sliders .slidercontainer input[type=range]::-moz-range-thumb {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-moz-range-thumb {
     height: 36px;
     width: 36px;
     background: #555;
     cursor: pointer;
   }
-  html body main #sliders .slidercontainer input[type=range]::-ms-thumb {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-ms-thumb {
     height: 36px;
     width: 36px;
     background: #555;
     cursor: pointer;
   }
-  html body main #sliders .slidercontainer input[type=range]::-webkit-slider-runnable-track {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 12px;
     cursor: pointer;
-    background: #ccc;
+    background: #eeecec;
   }
-  html body main #sliders .slidercontainer input[type=range]:active::-webkit-slider-runnable-track {
+  html body main #sliders .slidecontainer:first-child input[type=range]:active::-webkit-slider-runnable-track {
     background: #d6d6d6;
   }
-  html body main #sliders .slidercontainer input[type=range]::-moz-range-track {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-moz-range-track {
     width: 100%;
     height: 12px;
     cursor: pointer;
     background: #ccc;
   }
-  html body main #sliders .slidercontainer input[type=range]::-ms-track {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-ms-track {
     width: 100%;
     height: 12px;
     cursor: pointer;
@@ -273,16 +269,93 @@
     border-color: transparent;
     color: transparent;
   }
-  html body main #sliders .slidercontainer input[type=range]::-ms-fill-lower {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-ms-fill-lower {
     background: #ccc;
   }
-  html body main #sliders .slidercontainer input[type=range]:focus::-ms-fill-lower {
+  html body main #sliders .slidecontainer:first-child input[type=range]:focus::-ms-fill-lower {
     background: #ddd;
   }
-  html body main #sliders .slidercontainer input[type=range]::-ms-fill-upper {
+  html body main #sliders .slidecontainer:first-child input[type=range]::-ms-fill-upper {
     background: #ccc;
   }
-  html body main #sliders .slidercontainer input[type=range]:focus::-ms-fill-upper {
+  html body main #sliders .slidecontainer:first-child input[type=range]:focus::-ms-fill-upper {
+    background: #ddd;
+  }
+  html body main #sliders .slidecontainer:last-child {
+    /*#############Thumb##############*/
+    /*#############Track##############*/
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]:focus {
+    outline: none;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 36px;
+    width: 36px;
+    cursor: pointer;
+    margin-top: -12px;
+    background: url('genders.svg');
+    background-size: 100%;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-moz-range-thumb {
+    height: 36px;
+    width: 36px;
+    background: #555;
+    cursor: pointer;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-ms-thumb {
+    height: 36px;
+    width: 36px;
+    background: #555;
+    cursor: pointer;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 12px;
+    cursor: pointer;
+    background: #eeecec;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]:active::-webkit-slider-runnable-track {
+    background: #d6d6d6;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 12px;
+    cursor: pointer;
+    background: #ccc;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-ms-track {
+    width: 100%;
+    height: 12px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-ms-fill-lower {
+    background: #ccc;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]:focus::-ms-fill-lower {
+    background: #ddd;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]::-ms-fill-upper {
+    background: #ccc;
+  }
+  html body main #sliders .slidecontainer:last-child input[type=range]:focus::-ms-fill-upper {
     background: #ddd;
   }
   html body .S {
