@@ -44,11 +44,12 @@
   }
   html body #membercard .member {
     list-style: none;
-    box-shadow: 0vh 0vw 1px 1px;
+    box-shadow: 3px 3px 6px 0px;
     overflow: hidden;
     display: flex;
     border: solid;
     border-width: .3em;
+    color: #383838;
   }
   html body #membercard .member::before {
     width: 3em;

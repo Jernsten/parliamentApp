@@ -8,11 +8,15 @@ Creator: Kemal Demirtas (demirtas.kemal@outlook.com)
 
 This app is designed and tested for mobile and tablet screens,
 such as standard iPhone, Samsung, Pixel devices.
+It is not designed for desktops (yet).
 
 Only tested on Safari and Chrome.
+Hosted on Netlify,
+https://parliamentapp.netlify.com/
+
+No frameworks were used in the making of this app.
 
 
-No frameworks.
  */
 
 import { init, logger } from './build.js'
