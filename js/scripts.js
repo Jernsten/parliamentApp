@@ -7,7 +7,7 @@ Creator: Kemal Demirtas (demirtas.kemal@outlook.com)
 
 
 This app is designed and tested for mobile and tablet screens,
-such as standard iPhone, Samsung, Pixel devices.
+such as standard iPhone, Galaxy, Pixel devices.
 It is not designed for desktops (yet).
 
 Only tested on Safari and Chrome.
