@@ -48,8 +48,8 @@ async function display(members) {
         parliamentList.appendChild(memberLi)
     })
 
-    setupAgeSlider()
     attachSliderHandlers()
+    setupAgeSlider()
 
     return true
 }
